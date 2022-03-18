@@ -12,7 +12,6 @@ def index(request):
 def view_article(request,id):
     text = "Displaying article Number: %s"%(id)
     return HttpResponse(text)
-    #return render(request,text)
 
 def view_articles(request, month, year):
     text = "Displaying articles of : %s/%s"%(year,month)

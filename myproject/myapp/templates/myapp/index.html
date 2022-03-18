@@ -13,13 +13,13 @@
         <header id="main-header">
             <nav><a href="https://youtube.com" id="main-logo"> DjangoDays</a></nav>
             <h1> Days of Week</h1>
-            <p>Today it's {{day}}</p>
+            <p>Today it's {{day|lower}}</p>
         </header>
         <main>
             <section>
                 <h2>Upcoming Meetups</h2>
                 <ol>
-                    <!--{% if show_days == True %}-->
+                    {% if show_days == True %}
                         {% for d in daysOfWeeks %}
                             <li class="meetup-item">
                                 <article>
@@ -29,7 +29,7 @@
                                         </div>
                                         <div class = "meetup-details">
                                             <h3>{{d}}</h3>
-                                            <!--<address> {{meetup_item.location}} </address> -->
+                                            
                                         </div>
                                     </div>
                                     <div class="meetup-actions">
@@ -39,7 +39,17 @@
                                 </article>
                             </li>
                         {% endfor %}
-                    <!--{% endif %}-->
+                    {% else %}
+                        <div class="meetup-summary">
+                            <div class="meetup-image">
+                                <img src="" alt="">
+                            </div>
+                            <div class = "meetup-details">
+                                <h3>There are no information</h3>
+                                
+                            </div>
+                        </div>  
+                    {% endif %}
                 </ol>
             </section>
 
