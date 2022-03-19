@@ -7,23 +7,40 @@ from datetime import datetime
 
 def index(request):
     return HttpResponse("Welcome")
-    #return render(request,"Welcome!")
 
-def view_article(request,id):
-    text = "Displaying article Number: %s"%(id)
-    return HttpResponse(text)
-
-def view_articles(request, month, year):
-    text = "Displaying articles of : %s/%s"%(year,month)
-    return HttpResponse(text)
 
 def show_days(request):
     day = datetime.now().date()
-    daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    days = [{
+        'name':'Monday',
+        'time':'raining',
+        'slug':'a-monday-day'
+    },
+    {
+        'name':'Friday',
+        'time':'sunny',
+        'slug':'a-friday-day'
+    }
+    ]
+
     return render(request, "myapp/index.html",{
         'show_days':True,
         'day':day,
-        'daysOfWeeks':daysOfWeek
+        'daysOfWeeks':days,
+
     }
     )
+
+def specific_day(request,day_slug):
+    print(day_slug)
+    selected_day = {
+        'title': 'A certain day',
+        'description': 'This the day'
+    }
+    return render(request,"myapp/days.html",{
+        'day_name':selected_day['title'],
+        'day_description':selected_day['description']
+    }
+    
+)
 

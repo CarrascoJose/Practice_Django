@@ -1,59 +1,41 @@
+{% extends 'myapp/base/master.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Meetups</title>
-    <link rel="stylesheet" href="{% static 'meetups/styles/base.css' %}">
-    <link rel = "stylesheet" href = "{% static 'meetups/styles/all-meetups.css' %}">
-</head>
-    <body>
-        <header id="main-header">
-            <nav><a href="https://youtube.com" id="main-logo"> DjangoDays</a></nav>
-            <h1> Days of Week</h1>
-            <p>Today it's {{day|lower}}</p>
-        </header>
-        <main>
-            <section>
-                <h2>Upcoming Meetups</h2>
-                <ol>
-                    {% if show_days == True %}
-                        {% for d in daysOfWeeks %}
-                            <li class="meetup-item">
-                                <article>
-                                    <div class="meetup-summary">
-                                        <div class="meetup-image">
-                                            <img src="" alt="">
-                                        </div>
-                                        <div class = "meetup-details">
-                                            <h3>{{d}}</h3>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="meetup-actions">
-                                        <a href="" class = "btn"> More Details</a>
 
-                                    </div>
-                                </article>
-                            </li>
-                        {% endfor %}
-                    {% else %}
-                        <div class="meetup-summary">
-                            <div class="meetup-image">
-                                <img src="" alt="">
-                            </div>
-                            <div class = "meetup-details">
-                                <h3>There are no information</h3>
-                                
-                            </div>
-                        </div>  
-                    {% endif %}
-                </ol>
-            </section>
 
-        </main>
+{% block title%}Welcome!{% endblock %}
+{% block site_css %}
+<link rel = "stylesheet" href = "{% static 'meetups/styles/all-meetups.css' %}">
+{% endblock %}
 
-    </body>
-</html>
+{% block main_heading %}
+Days of Week
+{% endblock %}
+
+{% block header_content %}
+<p>Today it's {{day|lower}}</p>
+{% endblock %}
+
+
+{% block body %}
+<section>
+    <h2>Upcoming Meetups</h2>
+    <ol>
+        {% if show_days == True %}
+            {% for d in daysOfWeeks %}
+                {% include 'myapp/includes/day-item.html' with day_name=d.name day_time=d.time%}
+            {% endfor %}
+        {% else %}
+            <div class="meetup-summary">
+                <div class="meetup-image">
+                    <img src="" alt="">
+                </div>
+                <div class = "meetup-details">
+                    <h3>There are no information</h3>
+                    
+                </div>
+            </div>  
+        {% endif %}
+    </ol>
+</section>
+
+{% endblock %}
